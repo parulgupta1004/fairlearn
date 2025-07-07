@@ -1,6 +1,8 @@
 # Copyright (c) Microsoft Corporation and Fairlearn contributors.
 # Licensed under the MIT License.
 
+import warnings
+
 import pandas as pd
 from sklearn.datasets import fetch_openml
 from sklearn.linear_model import LogisticRegression
@@ -8,6 +10,10 @@ from sklearn.model_selection import train_test_split
 
 from fairlearn.postprocessing import ThresholdOptimizer
 from fairlearn.reductions import EqualizedOdds, ExponentiatedGradient
+
+# Filter the warnings for scipy.optimize deprecation since it is coming from sklearn and scipy incompatibility.
+# This is a temporary fix.
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 def test_random_state_threshold_optimizer():
